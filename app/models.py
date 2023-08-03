@@ -72,3 +72,12 @@ class Dev(Base):
             if freebie.item_name == item_name:
                 return True
         return False
+    
+    def give_away(self, dev, freebie):
+        if freebie in self.freebies:
+            freebie.dev_id = dev.id
+            freebie.dev = dev
+            session.commit()
+            return True
+        else:
+            return False

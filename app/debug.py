@@ -32,6 +32,10 @@ if __name__ == '__main__':
     session.add(dev)
     session.commit()
 
+    dev2 = Dev(name="Ninfa")
+    session.add(dev2)
+    session.commit()
+
     freebie = Freebie(item_name="T-shirt", value=10, company_id=company.id, dev_id=dev.id)
     session.add(freebie)
     session.commit()
@@ -42,9 +46,13 @@ if __name__ == '__main__':
     company.give_freebie( dev, "T-shirt", 10)
     company.give_freebie( dev, "Mug", 5)
 
-    print(dev.received_one("T-shirt"))  # Should print: True
-    print(dev.received_one("Mug"))  # Should print: True
-    print(dev.received_one("Sticker"))  # Should print: False
+    # print(dev.received_one("T-shirt"))  #  True
+    # print(dev.received_one("Mug"))  #  True
+    # print(dev.received_one("Sticker"))  # False
+
+
+    print(dev.give_away(dev2, freebie))  # True
+    print(dev.give_away(dev2, freebie))  # False
 
     companies = session.query(Company).all()
     for company in companies:
